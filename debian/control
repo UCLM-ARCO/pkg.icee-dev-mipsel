@@ -1,0 +1,17 @@
+Source: icee-dev
+Section: devel
+Priority: optional
+Maintainer: Oscar Aceña Herrera <oscaracena@gmail.com>
+Build-Depends: debhelper (>= 9.0.0)
+Standards-Version: 3.9.5
+Homepage: http://www.zeroc.com/icee/index.html
+
+Package: icee-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Development files for Ice-E
+ Ice-E ("Embedded Ice") is a compact communications engine
+ designed specifically for use in environments where resources are
+ scarce, such as Internet-enabled smart phones, personal digital
+ assistants (PDAs), and embedded controllers. This package provides
+ the development files.
