@@ -13,6 +13,16 @@ SOURCE_DIR  = IceE-$(SOURCE_VER)
 
 all:
 
+install: HEADERS_DIR = $(DESTDIR)/usr/mipsel-linux-gnu/include
+install: BIN_DIR = $(DESTDIR)/usr/bin
+install:
+	install -d $(HEADERS_DIR)/IceE
+	cp -r $(SOURCE_DIR)/cppe/include/IceE/*.h $(HEADERS_DIR)/IceE
+	cp -r $(SOURCE_DIR)/slice/IceE/*.h $(HEADERS_DIR)/IceE
+
+	install -d $(BIN_DIR)
+	cp $(SOURCE_DIR)/cpp/bin/slice2cppe $(BIN_DIR)
+
 download:
 	$(GET) $(SOURCE_URL)/$(SOURCE_FILE)
 
@@ -28,14 +38,18 @@ configure:
 	    HAS_OPAQUE_ENDPOINTS=yes \
 	    HAS_AMI=no
 
-install:
-	install -d $(DESTDIR)/usr/mipsel-linux-gnu/
-	cp -r $(SOURCE_DIR)/cppe/include $(DESTDIR)/usr/mipsel-linux-gnu/
+compile-slices: SLICE2CPPE = $(SOURCE_DIR)/cpp/bin/slice2cppe
+compile-slices:
+	for f in $(SOURCE_DIR)/slice/IceE/*.ice; do\
+	    $(SLICE2CPPE) $$f --ice \
+	        -I$(SOURCE_DIR)/slice \
+		--output-dir $(SOURCE_DIR)/slice/IceE; \
+	done
 
 build-package:
 	ian-build
 
-debian-package: download extract configure build-package
+debian-package: download extract configure compile-slices build-package
 
 
 vclean:
