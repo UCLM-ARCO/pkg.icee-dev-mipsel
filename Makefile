@@ -1,5 +1,8 @@
 # -*- mode: makefile-gmake; coding: utf-8 -*-
 
+# libs goes to: /usr/mipsel-linux-gnu/lib
+# headers in:   /usr/mipsel-linux-gnu/include
+
 SHELL       = /bin/bash
 GET         = wget
 SOURCE_VER  = 1.3.0
@@ -26,8 +29,8 @@ configure:
 	    HAS_AMI=no
 
 install:
-	install -d $(DESTDIR)/usr/
-	cp -r $(SOURCE_DIR)/cppe/include $(DESTDIR)/usr/
+	install -d $(DESTDIR)/usr/mipsel-linux-gnu/
+	cp -r $(SOURCE_DIR)/cppe/include $(DESTDIR)/usr/mipsel-linux-gnu/
 
 build-package:
 	ian-build

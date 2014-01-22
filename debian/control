@@ -1,4 +1,4 @@
-Source: icee-dev
+Source: icee-dev-mipsel-cross
 Section: devel
 Priority: optional
 Maintainer: Oscar Aceña Herrera <oscaracena@gmail.com>
@@ -6,12 +6,12 @@ Build-Depends: debhelper (>= 9.0.0)
 Standards-Version: 3.9.5
 Homepage: http://www.zeroc.com/icee/index.html
 
-Package: icee-dev
+Package: icee-dev-mipsel-cross
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Development files for Ice-E
+Description: Development files for Ice-E (for cross-compiling)
  Ice-E ("Embedded Ice") is a compact communications engine
  designed specifically for use in environments where resources are
  scarce, such as Internet-enabled smart phones, personal digital
  assistants (PDAs), and embedded controllers. This package provides
- the development files.
+ the development files for cross-compiling.
