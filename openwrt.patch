@@ -1,0 +1,56 @@
+diff -bBrupN original/cppe/Makefile modified/cppe/Makefile
+--- original/cppe/Makefile	2014-01-23 13:44:51.315700899 +0000
++++ modified/cppe/Makefile	2014-01-23 13:45:10.199910401 +0000
+@@ -11,7 +11,7 @@ top_srcdir	= .
+ 
+ include $(top_srcdir)/config/Make.rules
+ 
+-SUBDIRS		= src include test demo
++SUBDIRS		= src include
+ 
+ INSTALL_SUBDIRS = $(install_bindir) $(install_libdir) $(install_includedir)
+ 
+diff -bBrupN original/cppe/config/Make.rules modified/cppe/config/Make.rules
+--- original/cppe/config/Make.rules	2014-01-23 13:44:51.303700771 +0000
++++ modified/cppe/config/Make.rules	2014-01-23 13:45:10.215910576 +0000
+@@ -21,7 +21,7 @@ prefix			= /opt/IceE-$(VERSION)
+ # If neither is set, IceE is built with debug information.
+ #
+ 
+-#OPTIMIZE_SIZE		= yes
++OPTIMIZE_SIZE		= yes
+ #OPTIMIZE_SPEED		= yes
+ 
+ #
+diff -bBrupN original/cppe/config/Make.rules.Linux modified/cppe/config/Make.rules.Linux
+--- original/cppe/config/Make.rules.Linux	2014-01-23 13:44:51.303700771 +0000
++++ modified/cppe/config/Make.rules.Linux	2014-01-23 13:47:43.281607966 +0000
+@@ -65,7 +65,7 @@ ifeq ($(MACHINE),x86_64)
+    lp64suffix	= 64
+ endif
+ 
+-CXXFLAGS		= $(CXXARCHFLAGS) -ftemplate-depth-128 -Wall -D_REENTRANT
++CXXFLAGS		+= $(CXXARCHFLAGS) -ftemplate-depth-128 -Wall -D_REENTRANT
+ 
+ ifneq ($(GUMSTIX),yes)
+ CXXFLAGS		+= -I/usr/include/nptl
+@@ -119,7 +119,7 @@ mkshlib		= $(CXX) -shared $(LDFLAGS) -o
+ 
+ mklib		= $(AR) cr $(1) $(2)
+ 
+-LDPLATFORMFLAGS 	= -Wl,--enable-new-dtags -Wl,-rpath,$(install_libdir)
++LDPLATFORMFLAGS 	+= -Wl,--enable-new-dtags -Wl,-rpath,$(install_libdir)
+ 
+ ifeq ($(OPTIMIZE_SIZE),yes)
+     ifeq ($(STATICLIBS),yes)
+diff -bBrupN original/cppe/include/IceE/Time.h modified/cppe/include/IceE/Time.h
+--- original/cppe/include/IceE/Time.h	2014-01-23 13:44:51.303700771 +0000
++++ modified/cppe/include/IceE/Time.h	2014-01-23 13:45:10.215910576 +0000
+@@ -10,6 +10,7 @@
+ #ifndef ICEE_TIME_H
+ #define ICEE_TIME_H
+ 
++#include <sys/time.h>
+ #include <IceE/Config.h>
+ #include <ostream>
+ 
