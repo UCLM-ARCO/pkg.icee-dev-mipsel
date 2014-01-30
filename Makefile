@@ -16,8 +16,9 @@ SOURCE_DIR  = IceE-$(SOURCE_VER)
 all:
 
 install: HEADERS_DIR = $(DESTDIR)/usr/mipsel-linux-gnu/include
-install: LIB_DIR = $(DESTDIR)/usr/mipsel-linux-gnu/lib
-install: BIN_DIR = $(DESTDIR)/usr/bin
+install: LIB_DIR     = $(DESTDIR)/usr/mipsel-linux-gnu/lib
+install: SLICE_DIR   = $(DESTDIR)/usr/mipsel-linux-gnu/slice
+install: BIN_DIR     = $(DESTDIR)/usr/bin
 install:
 	install -d $(HEADERS_DIR)/IceE
 	cp -r $(SOURCE_DIR)/cppe/include/IceE/*.h $(HEADERS_DIR)/IceE
@@ -25,6 +26,9 @@ install:
 
 	install -d $(LIB_DIR)
 	cp -d $(SOURCE_DIR)/cppe/lib/* $(LIB_DIR)
+
+	install -d $(SLICE_DIR)/IceE
+	cp -r $(SOURCE_DIR)/slice/IceE/*.ice $(SLICE_DIR)/IceE
 
 	install -d $(BIN_DIR)
 	cp $(SOURCE_DIR)/cpp/bin/slice2cppe $(BIN_DIR)
